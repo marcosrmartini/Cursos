@@ -192,8 +192,46 @@ p  {
 	background:black;
 	text-decoration:underline;
 }
+
 .aula13_ul a:active {
 	background:red;
+}
+
+.aula13_ul a:visited {
+	color:yellow;
+}
+
+/* Aula 14 Tabelas */
+
+.aula14_tabela01 {
+	width:50%;
+	border-collapse:collapse;
+	border:1px solid black;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.aula14_tabela01 td {
+	border:1px solid black;
+}
+
+.aula14_tabela01 tr:hover {
+	background:blue;
+	color:white;
+}
+
+.aula14_tabela01 thead tr:hover {
+	background:none;
+	color:black;
+}
+
+.aula14_tabela01 thead tr {
+	background:blue;
+	color:white;
+}
+
+.aula14_tabela01 .trPar {
+	background:green;
 }
 
 
