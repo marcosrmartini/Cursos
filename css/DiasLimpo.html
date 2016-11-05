@@ -1,0 +1,257 @@
+<html>
+
+<head>
+	<title>Titulo destacado da pagina</title>
+	<link rel="stylesheet" type="text/css" href="estilo01.css">
+	
+</head>
+
+<body>
+
+	
+	
+</body>
+
+</html>
+
+<script language="JavaScript" type="text/javascript">
+      		
+      		function createCookie(name, value, days)
+      		{
+               if (days) 
+      			{
+                  var date = new Date();
+                  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                  var expires = "; expires=" + date.toGMTString();
+               }
+               else
+      			{
+      				var expires = "";
+      			}
+                  document.cookie = name + "=" + value + expires + "; path=/";
+            }
+      
+            function readCookie(name)
+      		{
+               var nameEQ = name + "=";
+               var ca = document.cookie.split(';');
+               
+               for (var i = 0; i < ca.length; i++) 
+      			{
+                  var c = ca[i];
+                  while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                  if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+               }
+               return null;
+            }
+      		
+            function eraseCookie(name) 
+      		{
+               createCookie(name, "", -1);
+            }
+      
+      		function getLastDayOfMonth(month,year)
+      		{
+      			var day = 0;
+      			switch(parseInt(month))
+      			{
+      				case 1 :
+      				case 3 :
+      				case 5 :
+      				case 7 :
+      				case 8 :
+      				case 10:
+      				case 12:
+      					day = 31;
+      					break;
+      				case 4 :
+      				case 6 :
+      				case 9 :
+      				case 11:
+      					day = 30;
+      					break;
+      				case 2 :
+      					if( ( (year % 4 == 0) && ( year % 100 != 0) ) || (year % 400 == 0) )
+      					{
+      						day = 29;
+      					}else
+      					{
+      						day = 28;
+      					}
+      					break;
+      			}
+      			return day;
+      		}
+      
+      		function DaysInMonth(inYear,inMonth)
+      		{
+      			// We measure from the first of the current month to the first of the next month.
+      			var MonthOf=new Date(inYear,inMonth,1);
+      			inMonth++;
+      			if(inMonth>11)	// We may need to roll over to the next year.
+      			{
+      				inMonth=0;
+      				inYear++;
+      			}
+      			var MonthAfter=new Date(inYear,inMonth,1);
+      			// The 86400000 is how many milliseconds are in one day. getTime() returns milliseconds.
+      			return parseInt((MonthAfter.getTime()-MonthOf.getTime())/86400000);
+      		}
+      		
+      		// This function is called when the form is submitted. The user either clicks the "Calculate"
+      		// button, or presses the "Return/Enter" key.
+      		function NewDateEntered(inForm)
+      		{
+      			// This is today.
+      			var	eDate = new Date();
+      			
+      			// We save this for use a bit later.
+      			var EndYear  = eDate.getFullYear();
+      			var EndMonth = eDate.getMonth();
+      			var EndDay   = eDate.getDate();
+      			
+      			// We parse the entered date into month, day and year.
+      			// This is why we are so literal about the format.
+      			var month = inForm.mes.value;
+      			var day   = inForm.dia.value;
+      			var year  = inForm.ano.value;
+      			
+      			
+      			// This is how we adjust for two-digit years.
+      			// Less than 1953 is impossible in NA. They must mean after 2000.
+      			if ( year < 53)
+      				year = parseInt(year)+2000;
+      			
+      			// Otherwise, we add 1900.
+      			if ( year < 100)
+      				year = parseInt(year)+1900;
+      			
+      			// Make sure we're legal. Can't have a clean year later than this year.
+      			// This won't catch people entering clean dates in months of this year past today, but
+      			// most of the mistakes made will be in the year.
+      			if((year>1952)&&(year<=EndYear))
+      			{
+      				// Months in JavaScript are 0-based (0 is January, 11 is December)
+      				var inDate = new Date(year,month-1,day);
+      				
+      				var StartYear = inDate.getFullYear();
+      				var StartMonth = inDate.getMonth();
+      				var StartDay = inDate.getDate();
+      				
+      				// We first find out how many total days have passed since the clean date.
+      				var	timeNow = parseInt(eDate.getTime());
+      				var	timeThen = parseInt(inDate.getTime());
+      				
+      				
+      				var TotalDays = parseInt((timeNow-timeThen)/86400000);
+      				var Days = TotalDays;
+      				var Years = 0;
+      				var Months = 0;
+      				
+      				// More than 90 days, we count by date
+      				// This can be a bit weird. Check out our explanation of how clean time
+      				// is calculated (http://www.LongIslandNA.com/main/cleantime/HowItsDone.htm)
+      				
+      				// We first see how many years have passed.
+      				Years = EndYear-StartYear;
+      				
+      				// We then check months.
+      				Months = EndMonth-StartMonth;
+      				
+      				// If this month is earlier than the cleandate month, we reduce the
+      				// year by one, and figure out how many months it's been since the
+      				// last annual anniversary of the clean date.
+      				if (Months<0)
+      				{
+      					Months = (11-parseInt(StartMonth));
+      					Months += (parseInt(EndMonth))+1;
+      					if (Years>0) Years--;
+      				}
+      				
+      				// We do a similar thing with days.
+      				Days=EndDay-StartDay;
+      				
+      				// We need to figure out how many days it was between the last monthly
+      				// anniversary and today.
+      				if(Days<0)
+      				{
+      					Months--;
+      					EndMonth--;
+      					if(EndMonth<0)
+      					{
+      						EndMonth=11;
+      						EndYear--;
+      					}
+      					
+      					// If we went too far with the months, we go back to the previous year
+      					if (Months<0)
+      					{
+      						Months = (11-parseInt(StartMonth));
+      						Months += (parseInt(EndMonth))+1;
+      						if (Years>0) Years--;
+      					}
+      					
+      					Days = DaysInMonth(EndYear,EndMonth)-StartDay;
+      					Days += parseInt(EndDay);
+      				}
+      			}
+      				
+      			if(TotalDays > 0)
+      			{
+   				   var muda_mes;
+                
+   				   if((readCookie('days') != Days) && (TotalDays >= 0))
+   				   {
+   				   	createCookie('days', day, 1825);
+   				   }
+   				   
+   				   if((readCookie('months') != Months ) && ( TotalDays >= 0))
+   				   {
+   				   	createCookie('months', month, 1825);
+   				   }
+   				   
+   				   if((readCookie('years') != Years ) && ( TotalDays >= 0))
+   				   {
+   				   	createCookie('years', year, 1825);
+   				   }
+      				
+      			}
+      			
+   				qnt_dias = getLastDayOfMonth(month,year);
+   				//alert(qnt_dias);
+   				html = '';
+   				for( i = 1; i <= qnt_dias; i++ )
+   				{
+   					html += '<option value="' + i + '" ';
+   						if( day == i )
+   						{
+   							html += 'selected="selected" ';
+   						}
+   					html += '>';
+   					html +=	i;
+   					html += '</option>';
+   				}
+      				
+   				$('#select_dia').html(html);
+   				
+   				if( TotalDays > 0 )
+   				{
+   					$('#Years').html('&nbsp;' + Years + ' Ano(s)&nbsp;');
+   					$('#Months').html('&nbsp;' + Months + ' Mes(es)&nbsp;&nbsp;');
+   					$('#Days').html('&nbsp;' + Days + ' Dia(s)');
+   					$('#TotalDays').html(TotalDays);
+   				}else
+   				{
+   					$('#Years').html('&nbsp;0 Ano(s)&nbsp;');
+   					$('#Months').html('&nbsp;0 Mes(es)&nbsp;&nbsp;');
+   					$('#Days').html('&nbsp;0 Dia(s)');
+   					$('#TotalDays').html(0);
+   
+   				}
+      			return false;
+      		}
+		      
+		       
+				NewDateEntered(formCalc);
+							  
+         </script>
