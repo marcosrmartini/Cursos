@@ -35,6 +35,13 @@ p  {
 	background:#091AA1;
 }
 
+/* Aula 07 */
+
+html {
+	height:100%;
+	width:100%;
+}
+
 .fundo_madeira {
 	background:url("imagens/fundo_madeira.jpg");
 }
@@ -62,8 +69,6 @@ p  {
 	font-family:"Courier New", Courier, monospace;
 	font-size:20px;
 	color:#FF00FF;
-	
-	
 }
 
 /* Aula 09 Text */
@@ -122,7 +127,6 @@ p  {
 	display:block;
 	width:120px;
 	height:120px;
-	
 }
 
 .aula11_margin01 {
@@ -176,7 +180,6 @@ p  {
 .aula13_ul > li{
 	display:inline;
 	margin:8px;
-	
 }
 
 .aula13_ul a{
@@ -185,7 +188,6 @@ p  {
 	padding:8px;
 	padding-left:15px;
 	padding-right:15px;
-	
 }
 
 .aula13_ul a:hover {
@@ -234,4 +236,170 @@ p  {
 	background:green;
 }
 
+/* Aula 15 Formularios */
+
+#frmContato {
+	width:500px;
+	margin-left:autp;
+	margin-right:auto;
+	border:1px solid gray;
+	padding:20px;
+}
+
+#frmContato label {
+	display:block;
+	margin-bottom:20px;
+}
+
+#frmContato textarea{
+	width:100%;
+	margin-bottom:15px;
+	height:180px;
+	border:1px solid gray;
+	padding:7px;
+	border-radius:10px;
+}
+
+#frmContato textarea:focus{
+	border:1px dashed blue;
+}
+
+#frmContato label input:focus{
+	border:1px dashed blue;
+}
+
+#frmContato label input {
+	width:350px;
+	border:1px solid gray;
+	padding:7px;
+	border-radius:10px;
+}
+
+.aula15_botao {
+	border-radius:10px;
+	border:1px solid gray;
+	color:white;
+	background:rgb(30,144,255);
+	padding:10px;
+}
+
+.aula15_botao:hover {
+	background:black;
+}
+
+/* Aula 16 Pseudo-elemento */
+
+#divExterna p:first-letter {
+	font-size:25px;
+}
+
+#divExterna p:first-line {
+	text-decoration:underline;
+}
+
+#divExterna p:first-child {
+	background:red;
+}
+
+#divExterna p:last-child {
+	background:green;
+}
+
+#divExterna p:nth-child(3) {
+	background:green;
+}
+
+/* Aula 17 - Classes avançadas */
+
+.aula17_classe01, .aula17_classe02 {
+	background:yellow;
+	width:150px;
+	height:150px;
+	float:left;
+	border:1px solid black;
+	display:block;
+	margin:8px;
+}
+
+.aula17_classe02 {
+	background:gray;
+}
+
+.aula17_classe01  div {
+	font-size:14px;
+}
+
+.aula17_classe01 > div {
+	font-size:20px;
+}
+
+.aula17_classe01 .aula17_classe02 {
+	background:red;
+	color:white;
+}
+
+/* Aula 18 - Display float e clear */
+
+.aula18_container {
+	width:940px;
+	margin-left:auto;
+	margin-right:auto;
+	background:gray;
+}
+
+.aula18_container .coluna {
+	background:red;
+	width:312px;
+	float:left;
+	margin-left:1px;
+}
+
+.aula18_container .coluna:last-child {
+	float:right;
+}
+
+.aula18_clearFloat {
+	clear:both;
+
+}
+
+.aula18_displayBlock, .aula18_displayInline {
+	border:1px solid black;
+	margin-top:10px;
+	margin-bottom:10px;
+	display:block;
+}
+
+.aula18_displayInline {
+	display:inline;
+}
+
+/* Aula 19 Posicionamento div */
+	
+.aula19_body {
+	margin:0px;
+	padding:0px;
+}
+
+.aula19_modal {
+	width:100%;
+	height:100%;
+	position:fixed;
+	background:url("imagens/bg_modal.png");
+	padding-top:10%;
+}
+
+.aula19_conteudoModal {
+	margin-left:auto;
+	margin-right:auto;
+	width:500px;
+	height:200px;
+	background:white;
+	border-radius:5px;
+	border:1px solid black;
+	padding:10px;
+	/* position:absolute;
+	top:40%;
+	left:40%; */
+}
 
